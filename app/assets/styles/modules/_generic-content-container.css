@@ -1,0 +1,20 @@
+.generic-content-container {
+    /* any paragraph element nested in the .generic-content-container element */
+    p {
+        line-height: 1.65;
+        /* our baseline does not need a font-size at all because it will default to 1 rem */
+        
+        margin: 1.8rem 0;
+        
+        /* use a media query mixin */
+        @mixin atSmall {
+            /* once a screen is large enough to be considered small (instead of tiny), use the 1.125 size */
+            font-size: 1.125rem;
+        }
+    }
+    
+    /* any links that live within a paragraph within the .generic-content-container class */
+    p a {
+        font-weight: 700;
+    }
+}

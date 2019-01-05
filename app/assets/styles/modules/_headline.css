@@ -1,0 +1,59 @@
+/* create a class that styles the headline block */
+.headline {
+    font-size: 1.9rem;
+    font-weight: 300;
+    color: $mainBlue;
+    
+    @mixin atSmall {
+        font-size: 2.875rem;
+    }
+    
+    /* create a modifier rule that centers the block horizontally */
+    &--centered {
+        text-align: center;
+    }
+    
+    /* create a modifier rule that turns the text orange */
+    &--orange {
+        color: $mainOrange;
+    }
+    
+    /* create a modifier rule that reduces the size of the text */
+    &--small {
+        font-size: 1.2rem;
+        @mixin atSmall {
+            font-size: 1.875rem;
+        }
+    }
+    
+    /* create a modifier rule that splits the text into two lines and centers it */
+    &--narrow {
+        max-width: 500px;
+        /* have it horizontally centered */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* create a modifier rule that uses a lighter/thinner font weight */
+    &--light {
+        font-weight: 100;
+    }
+    
+    /* create a modifier rule/class that decreases the margin below the first headline */
+    &--b-margin-small {
+         /* the nice thing about using em in this context is it's relative to the font size of the element itself */
+        /* which means we can re-use this --b-margin-large class on headlines that have different font sizes and this will open scale with it really nicely */
+        margin-bottom: .5em;
+    }
+    
+    /* create a modifier rule/class that increases the margin below the second headline */
+    &--b-margin-large {
+        /* the nice thing about using em in this context is it's relative to the font size of the element itself */
+        /* which means we can re-use this --b-margin-large class on headlines that have different font sizes and this will open scale with it really nicely */
+        margin-bottom: 1.6em;
+    }
+    
+    &--no-t-margin {
+        margin-top: 0;
+    }
+}

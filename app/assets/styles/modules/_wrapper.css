@@ -1,0 +1,36 @@
+.wrapper {
+    /* the negative margin on the right still exists */
+    /* it's where the padding or gutter for the second column is */
+    /* but because we chose the wrapper to have overflow hidden, we choose not to see it */
+    overflow: hidden;
+    
+    padding-left: 18px;
+    padding-right: 18px;
+    /* now that we applied box-sizing: border-box globally to all elements on the page */
+    /* and when we did that, actually decreased the max-width of
+    /* the "Here's how we got started" wrapper element by 36 pixels because of the left and right padding of 18px each */
+    /* to account for that change, we add 36px to the max-width value */
+    max-width: 1236px;
+    /* we want it to be horizontally (left and right) centered on the screen */
+    margin-left: auto;
+    margin-right: auto;
+    
+    &--medium {
+        max-width: 976px;
+    }
+    
+    /* any wrapper that is nested within another wrapper should no longer have any horizontal padding */
+    .wrapper {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    &--b-margin {
+        /*our baseline margin bottom */
+        margin-bottom: 1rem;
+        
+        @mixin atSmall {
+            margin-bottom: 3.875rem;
+        }
+    }
+}

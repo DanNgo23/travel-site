@@ -1,0 +1,63 @@
+.large-hero {
+    border-bottom: 10px solid $mainBlue;
+    position: relative;
+    
+    &__image {
+        /* by default, web browsers treat image elements as in-line level elements, not block level */
+        /* the browser thinks the image is similar to a line of text */
+        /* when the browser thinks this might be a line of text,
+        /* it wants to leave a little room or white space for the bottom part of certain letters that hang below like a g or y */
+        /* by declaring that the image should be a block level element, we are telling the web browser to treat the image almost as a div;
+        /* the web browser now treats it as a rectangle that can align perfectly without worrying about leaving any room for bottom parts of letters */
+        /* the default is display: inline, in which case the gap would come back */
+        display: block;
+    }
+    
+    &__text-content {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    &__title {
+        font-weight: 300;
+        color: $mainBlue;
+        margin: 0;
+        font-size: 2.4rem;
+        
+        /* access our mixin atSmall */
+        @mixin atSmall {
+            font-size: 4.8rem;
+        }
+        
+    }
+
+    &__subtitle {
+        font-weight: 300;
+        color: $mainBlue;
+        font-size: 1.5rem;
+        margin: 0;
+        
+        @mixin atSmall {
+            font-size: 2.9rem;
+        }
+    }
+
+    &__description {
+        color: #FFF;
+        font-size: 1.1rem;
+        font-weight: 100;
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, .1);
+        max-width: 30rem;
+        margin-left: auto;
+        margin-right: auto;
+        
+        @mixin atSmall {
+            font-size: 1.875rem;
+        }
+    }
+}
+

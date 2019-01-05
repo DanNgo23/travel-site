@@ -1,0 +1,48 @@
+.row {
+    
+    @mixin clearfix;
+    
+    /* counteract the right padding by selecting the main parent row with a modifier class of "gutters" */
+    /* and giving it a negative right margin that matches the padding value */
+    &--gutters {
+        margin-right: -65px;
+    }
+    
+    &--gutters > div {
+        padding-right: 65px;
+    }
+    
+    &__b-margin-until-medium {
+        /* add this margin until a screen is large enough to be considered medium */
+        margin-bottom: 1rem;
+    }
+    
+    /* only at medium screens or larger do we want these rules to be applied */
+    @mixin atMedium {
+        
+        &__b-margin-until-medium {
+            margin-bottom: 0;
+        }
+        
+        &__medium-4 {
+        float: left;
+        /* 100% divided by our 12 column grid means each one of our 12 grid bars is 8.33% */
+        /* the left side takes up 4 grid bars so 8.33% * 4 = 33.33% */
+        width: 33.33%;
+        }
+    
+        &__medium-4--larger {
+            width: 37%;
+        }
+        
+        &__medium-8 {
+            float: left;
+            width: 66.66%;
+        }
+        
+        &__medium-8--smaller {
+            width: 63%;
+        }
+    }
+    
+}

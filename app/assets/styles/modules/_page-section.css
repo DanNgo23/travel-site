@@ -1,0 +1,17 @@
+/* a new class that has the responsibility of adding top and bottom padding for each section on the page */
+.page-section {
+    padding: 1.2rem 0;
+    
+    @mixin atMedium {
+        /* the first will be top and bottom padding values */
+        /* the second is horizontal (left and right) padding */
+        padding: 4.5rem 0;
+    }
+    
+    /* a modifier class to turn the background blue */
+    &--blue {
+        background-color: $mainBlue;
+        /* make the text white */
+        color: #FFF;
+    }
+}

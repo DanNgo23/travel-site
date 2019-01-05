@@ -1,0 +1,29 @@
+/* create a mixin that passes styles along only to screens that are larger than what we consider to be a smartphone size */
+@define-mixin atSmall {
+    @media (min-width: 530px) {
+        @mixin-content;
+    }
+}
+
+@define-mixin atMedium {
+    @media (min-width: 800px) {
+        @mixin-content;
+    }
+}
+
+@define-mixin atLarge {
+    @media (min-width: 1200px) {
+        @mixin-content;
+    }
+}
+
+@define-mixin clearfix {
+    /* create pseudo or fake content with css */
+    /* will add blank space after all of the content in the main row div */
+    &::after {
+        content: "";
+        /* clear our floats */
+        clear: both;
+        display: table;
+    }
+}
