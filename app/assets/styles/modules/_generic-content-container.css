@@ -1,10 +1,13 @@
 .generic-content-container {
     /* any paragraph element nested in the .generic-content-container element */
     p {
+        font-weight: 300;
         line-height: 1.65;
         /* our baseline does not need a font-size at all because it will default to 1 rem */
         
-        margin: 1.8rem 0;
+        /* the first two 0s means to not have any top or right margin */
+        /* the numbers work in a clockwise fashion- top, right, bottom, left */
+        margin: 0 0 1.8rem 0;
         
         /* use a media query mixin */
         @mixin atSmall {

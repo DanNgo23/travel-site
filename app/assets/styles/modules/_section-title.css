@@ -1,0 +1,36 @@
+.section-title {
+    font-size: 2.55rem;
+    font-weight: 300;
+    text-align: center;
+    
+    @mixin atSmall {
+        font-size: 3.75rem;
+    }
+    
+    /* any strong tags nested within the section-title class should have a font-weight of 500 */
+    strong {
+        font-weight: 500;
+    }
+    
+    /* the double underscore means it is an element that belongs to the block section-title */
+    &__icon {
+        /* tell our baseline styles to make that element a block level element, which will drop the text after it onto a new line */
+        display: block;
+        /* now that it is a block level element, make sure it is horizontally centered */
+        margin-left: auto;
+        margin-right: auto;
+        /* add some margin vertically between the icon and the text */
+        margin-bottom: 0.6rem;
+        
+        @mixin atSmall {
+            margin-right: 0.5rem;
+            /* offset the left margin that we set for small screens */
+            margin-left: 0;
+            
+            /* undo for larger screens */
+            margin-bottom: 0;
+            /* tell the icon to be an inline-block level element- so that on larger screens, it won't drop the text down to a new line */
+            display: inline-block;
+        }
+    }
+}

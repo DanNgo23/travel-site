@@ -1,0 +1,42 @@
+.feature-item {
+    /* because we want the icon to be positioned in relation to it's parent, we give the parent element position relative */
+    position: relative;
+    
+    /* add vertical spacing between the elements */
+    padding-bottom: 2.5rem;
+    
+    /* for screen sizes of small or larger (but not tiny nor extra small) */
+    @mixin atSmall {
+        padding-left: 94px;
+    }
+    
+    &__icon {
+        display: block;
+        margin: 0 auto;
+        
+        @mixin atSmall {
+            position: absolute;
+            left: 0;
+        }
+    }
+    
+    &__title {
+        font-size: 1.6rem;
+        font-weight: 300;
+        /* reduce the top margin a bit */
+        margin-top: 0.7em;
+        
+        margin-bottom: 0.8rem;
+        /* horizontally center the title on very small screens */
+        text-align: center;
+        
+        @mixin atSmall {
+            /* keep the title left-aligned on larger screens */
+            text-align: left;
+            /* reset the top margin back */
+            margin-top: 1em;
+            
+            font-size: 1.875rem;
+        }
+    }
+}

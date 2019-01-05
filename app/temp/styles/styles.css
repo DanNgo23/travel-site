@@ -731,8 +731,20 @@ a {
 
 /* counteract the right padding by selecting the main parent row with a modifier class of "gutters" */
 
+.row--gutters-large {
+        margin-right: -100px;
+    }
+
+/* for our gutters modifier class, for any direct children that are div, so all of the columns */
+
 .row--gutters > div {
         padding-right: 65px;
+    }
+
+/* for our gutters-large modifier class, for any direct children that are div, so all of the columns */
+
+.row--gutters-large > div {
+        padding-right: 100px;
     }
 
 /* create pseudo or fake content with css */
@@ -761,6 +773,11 @@ a {
             width: 37%;
         }
         
+        .row__medium-6 {
+            float: left;
+            width: 50%;
+        }
+        
         .row__medium-8 {
             float: left;
             width: 66.66%;
@@ -774,10 +791,13 @@ a {
 /* any paragraph element nested in the .generic-content-container element */
 
 .generic-content-container p {
+        font-weight: 300;
         line-height: 1.65;
         /* our baseline does not need a font-size at all because it will default to 1 rem */
         
-        margin: 1.8rem 0;
+        /* the first two 0s means to not have any top or right margin */
+        /* the numbers work in a clockwise fashion- top, right, bottom, left */
+        margin: 0 0 1.8rem 0;
     }
 
 /* use a media query mixin */
@@ -794,5 +814,103 @@ a {
 
 .generic-content-container p a {
         font-weight: 700;
+    }
+
+.section-title {
+    font-size: 2.55rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+@media (min-width: 530px) {
+
+.section-title {
+        font-size: 3.75rem
+}
+    }
+
+/* any strong tags nested within the section-title class should have a font-weight of 500 */
+
+.section-title strong {
+        font-weight: 500;
+    }
+
+/* the double underscore means it is an element that belongs to the block section-title */
+
+.section-title__icon {
+        /* tell our baseline styles to make that element a block level element, which will drop the text after it onto a new line */
+        display: block;
+        /* now that it is a block level element, make sure it is horizontally centered */
+        margin-left: auto;
+        margin-right: auto;
+        /* add some margin vertically between the icon and the text */
+        margin-bottom: 0.6rem;
+    }
+
+@media (min-width: 530px) {
+
+.section-title__icon {
+            margin-right: 0.5rem;
+            /* offset the left margin that we set for small screens */
+            margin-left: 0;
+            
+            /* undo for larger screens */
+            margin-bottom: 0;
+            /* tell the icon to be an inline-block level element- so that on larger screens, it won't drop the text down to a new line */
+            display: inline-block
+    }
+    }
+
+.feature-item {
+    /* because we want the icon to be positioned in relation to it's parent, we give the parent element position relative */
+    position: relative;
+    
+    /* add vertical spacing between the elements */
+    padding-bottom: 2.5rem;
+}
+
+/* for screen sizes of small or larger (but not tiny nor extra small) */
+
+@media (min-width: 530px) {
+
+.feature-item {
+        padding-left: 94px
+}
+    }
+
+.feature-item__icon {
+        display: block;
+        margin: 0 auto;
+    }
+
+@media (min-width: 530px) {
+
+.feature-item__icon {
+            position: absolute;
+            left: 0
+    }
+    }
+
+.feature-item__title {
+        font-size: 1.6rem;
+        font-weight: 300;
+        /* reduce the top margin a bit */
+        margin-top: 0.7em;
+        
+        margin-bottom: 0.8rem;
+        /* horizontally center the title on very small screens */
+        text-align: center;
+    }
+
+@media (min-width: 530px) {
+
+.feature-item__title {
+            /* keep the title left-aligned on larger screens */
+            text-align: left;
+            /* reset the top margin back */
+            margin-top: 1em;
+            
+            font-size: 1.875rem
+    }
     }
 
