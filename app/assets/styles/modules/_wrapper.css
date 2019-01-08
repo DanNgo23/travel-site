@@ -19,6 +19,30 @@
         max-width: 976px;
     }
     
+    &--no-padding-until-medium {
+        /* offset left and right padding */
+        padding-left: 0;
+        padding-right: 0;
+        
+        /* but for screens considered medium or larger, we do want padding */
+        @mixin atMedium {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+    }
+    
+    &--no-padding-until-large {
+        /* offset left and right padding */
+        padding-left: 0;
+        padding-right: 0;
+        
+        /* but for screens considered medium or larger, we do want padding */
+        @mixin atLarge {
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+    }
+    
     /* any wrapper that is nested within another wrapper should no longer have any horizontal padding */
     .wrapper {
         padding-left: 0;

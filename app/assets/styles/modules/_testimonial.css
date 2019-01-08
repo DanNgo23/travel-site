@@ -1,0 +1,61 @@
+.testimonial {
+    background-color: rgba(255, 255, 255, 0.8);
+    /* no padding on the top, some on the right, 1 pixel of bottom padding, some on the left */
+    padding: 0 18px 1px 18px;
+    
+    /* we use position-relative on the testimonial images to pull them up 80 pixels out of their natural position */
+    /* on larger screens that is okay because all of the columns sit by each other side by side */
+    /* on mobile, the three testimonials will stack on top of each other */
+    /* need to add some margin-bottom to each testimonial on smaller screens to counteract this overlapping issue */
+    /* we have the bottom margin for smaller screens */
+    margin-bottom: 98px;
+    
+    @mixin atLarge {
+        /* we do not have that bottom margin for larger screens (size medium or larger) */
+        margin-bottom: 0;
+        padding: 0 1.8125rem 1px 1.8125rem;
+    }
+    
+    /* eliminate the light blue gap that is being created by the margin-bottom added to testimonials */
+    &--last {
+        margin-bottom: 0;
+    }
+   
+    &__photo {
+        /* create rounded corners; to get a circle, have border radius to be half of height/width in pixels */
+        border-radius: 80px;
+        overflow: hidden;
+        width: 160px;
+        height: 160px;
+        
+        /* center the image horizontally */
+        /* give the image a bit of negative bottom margin so that the text also moves up 80 pixels with the image */
+        margin: 0 auto -80px auto;
+        
+        /* we want the top half of the image to violate the edge */
+        /* we need to pull the image up half of its height, which is 80 pixels */
+        position: relative;
+        top: -80px;
+        
+        /* give the div a 6 pixel border */
+        border: 6px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    &__title {
+        color: $mainBlue;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 500;
+        /* reduce the space between the image and the name below the image */
+        margin: 0;
+    }
+    
+    &__subtitle {
+        color: $mainOrange;
+        text-align: center;
+        font-size: 0.9375;
+        font-weight: 400;
+        /* reduce the space between the top heading (the name) and the bottom heading (the n Time Escaper) */
+        margin: 0.25rem 0 1rem 0;
+    }
+}

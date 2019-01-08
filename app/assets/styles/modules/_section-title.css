@@ -12,8 +12,17 @@
         font-weight: 500;
     }
     
+    /* a modifier class that assigns the color of our $mainBlue variable */
+    &--blue {
+        color: $mainBlue;
+    }
+    
     /* the double underscore means it is an element that belongs to the block section-title */
     &__icon {
+        /* push the icon down 8 pixels */
+        position: relative;
+        top: 8px;
+        
         /* tell our baseline styles to make that element a block level element, which will drop the text after it onto a new line */
         display: block;
         /* now that it is a block level element, make sure it is horizontally centered */

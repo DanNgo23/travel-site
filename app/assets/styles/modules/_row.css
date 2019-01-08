@@ -2,6 +2,13 @@
     
     @mixin clearfix;
     
+    /* because we use position: relative to pull the testimonial images up out of their natural position, */
+    /* and pulled the images up 80 pixels from where they would normally sit, we can counteract this overlapping issue */
+    /* and we do this by adding 80 pixels of top padding to the top of the testimonials row */
+    &--t-padding {
+        padding-top: 80px;
+    }
+    
     /* counteract the right padding by selecting the main parent row with a modifier class of "gutters" */
     /* and giving it a negative right margin that matches the padding value */
     &--gutters {
@@ -12,6 +19,10 @@
         margin-right: -100px;
     }
     
+    &--gutters-small {
+        margin-right: -45px;
+    }
+    
     /* for our gutters modifier class, for any direct children that are div, so all of the columns */
     &--gutters > div {
         padding-right: 65px;
@@ -20,6 +31,11 @@
     /* for our gutters-large modifier class, for any direct children that are div, so all of the columns */
     &--gutters-large > div {
         padding-right: 100px;
+    }
+    
+    /* for small gutters, look inside that element for direct descendants that have a tag type of div */
+    &--gutters-small > div {
+        padding-right: 45px;
     }
     
     &__b-margin-until-medium {
@@ -57,6 +73,81 @@
         
         &__medium-8--smaller {
             width: 63%;
+        }
+    }
+    
+    /* only at medium screens or larger do we want these rules to be applied */
+    @mixin atLarge {
+        
+        &__b-margin-until-large {
+            margin-bottom: 0;
+        }
+        
+        &__large-4 {
+        float: left;
+        /* 100% divided by our 12 column grid means each one of our 12 grid bars is 8.33% */
+        /* the left side takes up 4 grid bars so 8.33% * 4 = 33.33% */
+        width: 33.33%;
+        }
+    
+        &__large-4--larger {
+            width: 37%;
+        }
+        
+        &__large-6 {
+            float: left;
+            width: 50%;
+        }
+        
+        &__large-8 {
+            float: left;
+            width: 66.66%;
+        }
+        
+        &__large-8--smaller {
+            width: 63%;
+        }
+    }
+    
+    /* begin equal height rules, target the appropriate modifier class */
+    /* once a screen is large enough to be considered medium, */
+    /* we will apply a bit of css to make all of the columns equal height */
+    &--equal-height-at-medium {
+        @mixin atMedium {
+            /* tell the parent row div to use flexbox */
+            /* by itself, this won't do anything */
+            /* however, if we also tell each of the three testimonial columns to use flexbox, */
+            /* instead of being floated to the left, the contents of each will flex to match the tallest element */
+            display: flex;
+        }
+        
+        /* the ampersand & will give us the selector - '&--equal-height-at-medium'
+        /* only select direct descendants that have a tag type of div */
+        /* stop being floated, and start using flexbox instead */
+        & > div {
+            float: none;
+            display: flex;
+        }
+    }
+    
+    /* begin equal height rules, target the appropriate modifier class */
+    /* once a screen is large enough to be considered medium, */
+    /* we will apply a bit of css to make all of the columns equal height */
+    &--equal-height-at-large {
+        @mixin atLarge {
+            /* tell the parent row div to use flexbox */
+            /* by itself, this won't do anything */
+            /* however, if we also tell each of the three testimonial columns to use flexbox, */
+            /* instead of being floated to the left, the contents of each will flex to match the tallest element */
+            display: flex;
+        }
+        
+        /* the ampersand & will give us the selector - '&--equal-height-at-medium'
+        /* only select direct descendants that have a tag type of div */
+        /* stop being floated, and start using flexbox instead */
+        & > div {
+            float: none;
+            display: flex;
         }
     }
     

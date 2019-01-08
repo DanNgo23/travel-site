@@ -8,10 +8,41 @@
         padding: 4.5rem 0;
     }
     
+    &--no-b-padding-until-medium {
+        padding-bottom: 0;
+        
+        @mixin atMedium {
+            padding-bottom: 4.5rem;
+        }
+    }
+    
+     &--no-b-padding-until-large {
+        padding-bottom: 0;
+        
+        @mixin atLarge {
+            padding-bottom: 4.5rem;
+        }
+    }
+    
     /* a modifier class to turn the background blue */
     &--blue {
         background-color: $mainBlue;
         /* make the text white */
         color: #FFF;
+    }
+    
+    &--testimonials {
+        
+        /* for smaller screens, this is the baseline */
+        /* hexadecimal color code for a nice light blue */
+        background-color: #e0e6ef;
+        
+        @mixin atLarge {
+            /* tell the image to be aligned at the top of the section, and horizontally, to be aligned in the center */
+            /* the image should not repeat; only display once */
+            background: url('/assets/images/testimonials-bg.jpg') top center no-repeat;
+            /* shrink or stretch the image to always be large or small enough to perfectly cover the containing div */
+            background-size: cover;
+        }
     }
 }
