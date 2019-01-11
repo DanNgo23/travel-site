@@ -1,0 +1,29 @@
+/* Do not edit modules/_sprite directly, as it is generated automatically gy Gulp.
+   Instead, edit gulp/templates/sprite. */
+
+/* the gulp svgSprite package makes use of the moustache template system */
+/* within these two shapes lines, any code that we include will be looped/repeated through for each icon */
+
+{{#shapes}}
+    /* any code we include between 'first' will only run once for the first item that gets looped through */
+    {{#first}}
+        /* a baseline icon rule */
+        .icon {
+            /* provide a url path that points towards the sprite svg file */
+            /* the {{{sprite}}} variable is responsible for going into the svg folder and getting the path for the sprite file */
+            background-image: url('/assets/images/sprites/{{{sprite}}}');
+        }
+    {{/first}}
+        
+    /* we want to use a variable, leave an opening in the template that the package can fill in with info for each icon */
+    .icon--{{base}} {
+        /* all icon rules will have their specific info specified */
+        width: {{width.outer}}px;
+        height: {{height.outer}}px;
+        
+        /* instead of going with something like 15px (from the left) [and] 80px (from the top) */
+        /* instead, we want something the template can fill in with unique data for each icon */
+        /* we fill in its x and y coordinates */
+        background-position: {{position.relative.xy}};
+    }
+{{/shapes}}

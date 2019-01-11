@@ -17,4 +17,5 @@ gulp.task('html', function () {
 /* don't need to use the .js at the end of the file that we are requiring */
 require('./gulp/tasks/styles');
 require('./gulp/tasks/watch');
+require('./gulp/tasks/sprites');
 
