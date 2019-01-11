@@ -1,0 +1,28 @@
+.site-footer {
+    background-color: $mainBlue;
+    /* change text color to white */
+    color: #FFF;
+    /* give some vertical padding but no horizontal padding */
+    padding: 0.5rem 0;
+    /* horizontally align the content to be centered */
+    text-align: center;
+    
+    &__text {
+        display: block;
+        /* add some bottom margin after the white text so there is space before the orange button */
+        margin-bottom: 1rem;
+        
+        font-weight: 200;
+        
+        /* once the screen is large enough to be considered medium */
+        @mixin atMedium {
+            /* set it back to an inline level element */
+            display: inline;
+            /* no longer need bottom margin */
+            margin-bottom: 0;
+            /* add horizontal spacing between the white text and the orange button */
+            margin-right: 1.4rem;
+    
+        }
+    }
+}

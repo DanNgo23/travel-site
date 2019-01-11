@@ -1381,3 +1381,35 @@ a {
         background-position: 36.69752421959096% 45.792307692307695%;
     }
 
+.site-footer {
+    background-color: #2f5572;
+    /* change text color to white */
+    color: #FFF;
+    /* give some vertical padding but no horizontal padding */
+    padding: 0.5rem 0;
+    /* horizontally align the content to be centered */
+    text-align: center;
+}
+
+.site-footer__text {
+        display: block;
+        /* add some bottom margin after the white text so there is space before the orange button */
+        margin-bottom: 1rem;
+        
+        font-weight: 200;
+    }
+
+/* once the screen is large enough to be considered medium */
+
+@media (min-width: 800px) {
+
+.site-footer__text {
+            /* set it back to an inline level element */
+            display: inline;
+            /* no longer need bottom margin */
+            margin-bottom: 0;
+            /* add horizontal spacing between the white text and the orange button */
+            margin-right: 1.4rem
+    }
+    }
+
