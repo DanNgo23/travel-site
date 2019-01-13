@@ -1,0 +1,70 @@
+.primary-nav {
+    /* create a vertical gap between "get in touch" and the three boxes */
+    padding-top: 10px;
+    /* no vertical gap for larger screens */
+    @mixin atMedium {
+        padding-top: 0;
+    }
+    
+    &--pull-right {
+        @mixin atMedium {
+            float: right;
+        }
+    }
+    
+    /* unordered lists */
+    ul {
+        margin: 0;
+        padding: 0;
+        @mixin clearfix;
+    }
+    
+    /* list items */
+    li {
+        /* remove the bullets */
+        list-style: none;
+        /* will allow them to be horizontally centered */
+        display: inline-block;
+        
+        padding-right: 7px;
+        @mixin atMedium {
+            padding-right: 20px;
+            /* floated left so they will all sit on one line */
+            float: left;
+            
+            display: block;
+        }
+    }
+    
+    /* the final list item in the list */
+    li:last-child {
+        padding-right: 0;
+        @mixin atMedium {
+            padding-right: 20px;
+        }
+    }
+    
+    a {
+        /* text should be white */
+        color: #FFF;
+        font-weight: 300;
+        /* remove the underline */
+        text-decoration: none;
+        
+        display: block;
+        /* add some vertical padding and horizontal padding */
+        padding: 5px 8px;
+        
+        font-size: 0.8rem;
+        background-color: rgba($mainBlue, 0.5);
+        
+        @mixin atMedium {
+            /* add some vertical padding but no horizontal padding (can be 12px) */
+            padding: 15px 0;
+            /* use a standard font-size of 1rem */
+            font-size: 1rem;
+            /* use not background color */
+            background-color: transparent;
+        }
+    }
+}

@@ -29,6 +29,12 @@ gulp.task('watch', function() {
         /* gulp.start('styles'); */
         gulp.start('cssInject');
     });
+    
+    /* watch for any changes to any of our javascript files */
+    watch('./app/assets/scripts/**/*.js', function() {
+        /* begin or start up our scriptsRefresh task */
+        gulp.start('scriptsRefresh');
+    });
 });
 
 /* before gulp run our cssInject task, we tell it to begin and complete any dependency task that we list in the second argument */
@@ -41,4 +47,12 @@ gulp.task('cssInject', ['styles'], function() {
     /* the stream method will make whatever we are piping into it available in the browser*/
     return gulp.src('./app/temp/styles/styles.css')
     .pipe(browserSync.stream());
+});
+
+/* we don't want to reload the page until the new webpack bundled file has had a chance to be generated */
+/* so we will do is tell gulp the sciptsRefresh task has a dependency of our main scripts task */
+/* so now, the scriptsRefresh task won't begin until our main scripts task has had a chance to begin and complete */
+gulp.task('scriptsRefresh', ['scripts'], function() {
+    /* tell browserSync to reload the page */
+    browserSync.reload();
 });

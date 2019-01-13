@@ -1,0 +1,242 @@
+.site-header {
+    /* give some vertical padding (can be 10px) but no horizontal padding */
+    padding: 6px 0;
+    /* have the site header overlay the large hero section */
+    position: absolute;
+    /* when an element is positioned absolutely, by default, it will try to shrink-wrap */
+    /* and only use as much space as it needs to fit its content */
+    /* change to take up the whole width of the page */
+    width: 100%;
+    /* the large hero block that is currently overlapping the site header does not have a z index value */
+    /* but the element with a higher z-index value gets placed on top; we want the site header on top */
+    z-index: 2;
+    
+    /* have the menu fade into view gradually */
+    /* when this element's background color changes, we want it to gradually */
+    /* transition to the new value over the course of a certain period of time */
+    /* at 0.3 seconds the transition or fade will be fairly quick */
+    /* be default, the transition will be linear, but we choose ease-out */
+    transition: background-color 0.3s ease-out;
+    
+    /* create a new modifier with & so we don't have to type site-header again */
+    &--is-expanded {
+        background-color: rgba($mainBlue, 0.55);
+    }
+    
+    @mixin atMedium {
+        /* transparent blue */
+        /* the postcss-hexrgba plugin automatically converts hexadecimal color codes to rgb values 47, 85, 114 */
+        background-color: rgba($mainBlue, 0.3);
+    }
+    
+    &__btn-container {
+        @mixin atMedium {
+            float: right;
+        }
+    }
+    
+    /* because our logo is taller than any of the content of the button or list, */
+    /* the transparent blue bar is expanding vertically to fit the logo */
+    /* we need to remove the clear view escapes logo from the natural flow of the page */
+    /* that way, the containing element that gives us the transparent blue background won't even be aware that the logo exists */ 
+    &__logo {
+        /* now the height of the bar is determined by the content of the get in touch button */
+        position: absolute;
+        /* the logo should be positioned at the very top so it's top position should be 0 */
+        top: 0;
+        /* pull it to the right, i.e. have 50% of the page width to the left of the logo */
+        left: 50%;
+        /* the previous line will pull the logo to far to the right */
+        /* to center it, we need to pull the logo back to the left by an amount of half of it's own width */
+        /* if we put 1 in the scale function, the logo would stay the same original size */
+        /* we can decrease the size by going below a value of 1 */
+        transform: translateX(-50%) scale(0.8);
+        /* by default, when we use transform: scale, */
+        /* the element considers its perfect center to be the origin of the tranform, */
+        /* meaning it shrink equally in all 4 directions so that its center is still positioned */
+        /* in the same place as it was before the shrinking occured */
+        /* by default, transform-origin: 50% 50%, meaning the perfect middle horizontally and vertically */
+        /* if we change the vertical value to 0, then the element considers the top center its point of origin */
+        transform-origin: 50% 0;
+        background-color: $mainBlue;
+        /* 25 pixels of vertical padding and 36 pixels of horizontal padding */
+        padding: 25px 36px;
+        
+        /* undo the left and transform properties to put the logo on the top left */
+        @mixin atMedium {
+            left: auto;
+            transform: translateX(0);
+        }
+    }
+    
+    &__logo__graphic {
+        /* hide the text */
+        text-indent: -9999px
+    }
+    
+    &__menu-icon {
+        /* create a square */
+        width: 20px;
+        height: 19px;
+        /* position in the top right corner */
+        position: absolute;
+        /* when we adjust the z-index value of the menu content div, and once the menu content is visible, */
+        /* the menu content is overlapping the menu icon and thus, */
+        /* we cannot click on the menu icon again to hide the menu content back */
+        /* we fix this by giving the menu icon a larger z-index value */
+        z-index: 10;
+        /* sit down from the very top by 10 pixels */
+        top: 10px;
+        /* sit in from the very far right by 10 pixels */
+        right: 10px;
+        
+        /* code for the top bar */
+        /* the ampersand & refers to its parent selector __menu-icon */
+        /* the ::before creates a pseudo element that we can style to look just like the top bar */
+        &::before {
+            /* in order to make sure the pseudo element appears, we use content and an empty pair of quotes */
+            content: "";
+            
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 3px;
+            background-color: #FFF;
+            /* by default, web browsers use transform-orgin: 50% 50%, */
+            /* for the horizontal and vertical center of the element */
+            /* if we want to set the top left corner of the element to be the transform origin, we use 0 0 */
+            transform-origin: 0 0;
+            /* we don't want to abruptly switch between the 3 bars and the X icons */
+            /* we want to the shapes and the icons to animate */
+            /* and gradually transform and transition into the other shape */
+            /* we want to transition the transform property over the course of 300 milliseconds */
+            /* with an ease-out transition style */
+            transition: transform 0.3s ease-out;
+        }
+        
+        /* code for the middle bar */
+        &__middle {
+            position: absolute;
+            /* instead of in the top corner of its parent div, have it sit 8 pixels down from the top */
+            top: 8px;
+            left: 0;
+            width: 20px;
+            height: 3px;
+            background-color: #FFF;
+            /* transition the opacity property over the course of 300 milliseconds */
+            /* with the ease-out transition style */
+            /* instead of transitioning out only its opacity property, we transition all properties */
+            /* because we also transformed its scaleX property */
+            transition: all 0.3s ease-out;
+            /* set the transform origin to be horizontally 0 (the left  edge) */
+            /* and the vertically to be 50%, which is the perfect center */
+            /* the middle bar not only fades away with opacity, */
+            /* but now it also shrinks or retracts in to the left edge */
+            transform-origin: 0 50%;
+        }
+        
+        /* code for the bottom bar */
+        &::after {
+            position: absolute;
+            content: "";
+            /* have the bottom bar sit at the very bottom */
+            bottom: 0;
+            left: 0;
+            width: 20px;
+            height: 3px;
+            background-color: #FFF;
+            /* we want the bottom left corner of the element to be the transform origin */
+            /* 0 points towards the left corner and 100% points towards the very vertical bottom */
+            transform-origin: 0 100%;
+            /* we don't want to abruptly switch between the 3 bars and the X icons */
+            /* we want to the shapes and the icons to animate */
+            /* and gradually transform and transition into the other shape */
+            /* we want to transition the transform property over the course of 300 milliseconds */
+            /* with an ease-out transition style */
+            transition: transform 0.3s ease-out;
+            
+        }
+        
+        @mixin atMedium {
+            /* hide the icon completely */
+            display: none;
+        }
+    }
+    
+    /* within this rule, we can target each of the three horizontal bars */
+    /* and modify them, however we need to, in order to create the X */
+    &__menu-icon--close-x {
+        /* target the top horizontal bar */
+        &::before {
+            /* rotate 45 degrees clockwise so it appears diagonal */
+            /* increase the top bar's width and not height size 1.25 times */
+            transform: rotate(45deg) scaleX(1.25);
+        }
+        
+        /* we cannot use the ampersand & because that would use the __menu-icon--close-x as our base */
+        /* our middle bar does not have close-x in its name */
+        .site-header__menu-icon__middle {
+            /* hide the middle bar */
+            opacity: 0;
+            /* shrink down its width from 100% to 0 */
+            transform: scaleX(0);
+        }
+        
+        /* target the bottom horizontal bar */
+        &::after {
+            /* rotate 45 degrees counter-clockwise so it appears diagonal */
+            /* increase the top bar's width and not height size 1.25 times */
+            /* translateY allows us to adjust the Y coordinate or vertical positioning for an element */
+            /* we want to push the bar down by 1 pixel */
+            transform: rotate(-45deg) scaleX(1.25) translateY(1px);
+        }
+    }
+    
+    &__menu-content {
+        /* make hidden by default */
+        /* display: none; */
+        /* instead, let's make the content still hidden initially */
+        /* but once the is-visible modifier class is added, it will gradually fade to an opacity of 1 */
+        opacity: 0;
+        /* add a zoomout effect */
+        /* make the content initially look bigger than where we want it to end up */
+        /* 1 is the element's natural size and we'll make it 20% larger */
+        transform: scale(1.2);
+        
+        /* we want the transition for all properties to gradually change over course of 0.3 seconds */
+        transition: all 0.3s ease-out;
+        /* because we are no longer using display: none to hide the menu content and instead using opacity, */
+        /* this means that even though the content will be invisible initially, it will still exist in the browser */
+        /* and it can still be clicked on; however, we don't want the user to be able to accidentally click on invisible content */
+        /* so we use z-index and provide a negative value to ensure that the menu content, when hidden, */
+        /* sits beneath all the other content on the page so that it cannot be accidentally clicked on */
+        /* if using z-index, need position: relative, otherwise the browser won't acknowledge our z-index value */
+        position: relative;
+        z-index: -10;
+        
+        padding-top: 90px;
+        text-align: center;
+        
+        @mixin atMedium {
+            /* reset everything to be normal for medium screens or larger */
+            opacity: 1;
+            z-index: 1;
+            padding-top: 0;
+            transform: scale(1);
+        }
+        
+        /* revealing and hiding the nagivation links for small screens is */
+        /* as simple as adjusting our css to target that is-visible modifier class */
+        /* the ampersand & refers to &__menu-content */
+        &--is-visible {
+            /* opacity of 1 is fully visible */
+            opacity: 1;
+            /* when the content is ready to be visible, we give it a z-index of 1 */
+            z-index: 1;
+            /* place it back to its natural size */
+            transform: scale(1);
+        }
+    }
+    
+}

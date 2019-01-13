@@ -4,13 +4,14 @@ autoprefixer = require('autoprefixer'),
 cssvars = require('postcss-simple-vars'),
 nested = require('postcss-nested'),
 cssImport = require('postcss-import'),
-mixins = require('postcss-mixins');
+mixins = require('postcss-mixins'),
+hexrgba = require('postcss-hexrgba');
 
 gulp.task('styles', function () {
     return gulp.src('./app/assets/styles/styles.css')
         /* postcss() is expecting an array */
         /* postcss manipulates the contents of a file in any way that we please */
-        .pipe(postcss([cssImport, mixins, cssvars, nested, autoprefixer]))
+        .pipe(postcss([cssImport, mixins, cssvars, nested, hexrgba, autoprefixer]))
         /* by default, when an error occurs, all gulp tasks are ended (included the gulp watch task) */
         /* we want to end things on a positive note, even if an error happens */
         /* the first argument in the on function is the name of the event that we are interested in */
