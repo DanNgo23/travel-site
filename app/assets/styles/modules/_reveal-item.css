@@ -1,0 +1,24 @@
+/* begin with a class selector */
+.reveal-item {
+    /* hide the element initially be setting its opacity to 0 */
+    opacity: 0;
+    /* don't want to have it go from hidden to revealed in just 1 millisecond*/
+    /* we want it to gradually fade in */
+    /* the opacity property should gradualy change over the course of 1.5 seconds */
+    /* use the ease-out transition style */
+    /* instead of transitioning the opacity property, transition all properties */
+    transition: all 1.5s ease-out;
+    
+    /* set the baseline style to have a transform the scale is a little larger than normal */
+    transform: scale(1.15);
+    /* and within our --is-visible modifier, set the transform to reset the scale to its normal size */
+    /* this creates a nice zoom out effect */
+    
+    /* need to use JS to programmatically add the &--is-visible class to the hidden elements at */
+    /* precisely the right moment when they are scrolled to */
+    /* ampersand & gives us .reveal-item, and then we add on a modifier */
+    &--is-visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

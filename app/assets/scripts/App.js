@@ -43,6 +43,20 @@ $("h1").remove();
 
 /* this variable could be any name */
 import MobileMenu from './modules/MobileMenu';
+import RevealOnScroll from './modules/RevealOnScroll';
+
+import $ from 'jquery';
 
 /* create a new object that uses the above class as a blueprint */
 var mobileMenu = new MobileMenu();
+
+/* we need to pass a couple arguments within these two constructors in order */
+/* to describe which elements we want to reveal and what offset they should use */
+/* the first argument will be a jquery selector that points to the element we want */
+/* we can reveal any element on the page on scroll by simply reusing and recycling */
+/* our RevealOnScroll class; we chose two elements belwo */
+
+/* the first instance or object will be for our feature items */
+new RevealOnScroll($(".feature-item"), "85%");
+/* the second instance or object will be for our testimonial items */
+new RevealOnScroll($(".testimonial"), "60%");
