@@ -44,6 +44,7 @@
         }
     }
     
+    /* the rule targeting the link elements */
     a {
         /* text should be white */
         color: #FFF;
@@ -60,11 +61,18 @@
         
         @mixin atMedium {
             /* add some vertical padding but no horizontal padding (can be 12px) */
-            padding: 15px 0;
+            padding: 12px 0;
             /* use a standard font-size of 1rem */
             font-size: 1rem;
             /* use not background color */
             background-color: transparent;
+            
+            /* the ampersand & gives us the "a" selector */
+            /* and apply only if it has a class of is-current-link */
+            &.is-current-link {
+                /* we give the current link a light orange color */
+                color: #fabb69;
+            }
         }
     }
 }

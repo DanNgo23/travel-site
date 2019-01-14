@@ -46,6 +46,7 @@ import MobileMenu from './modules/MobileMenu';
 import RevealOnScroll from './modules/RevealOnScroll';
 
 import $ from 'jquery';
+import StickyHeader from './modules/StickyHeader';
 
 /* create a new object that uses the above class as a blueprint */
 var mobileMenu = new MobileMenu();
@@ -60,3 +61,5 @@ var mobileMenu = new MobileMenu();
 new RevealOnScroll($(".feature-item"), "85%");
 /* the second instance or object will be for our testimonial items */
 new RevealOnScroll($(".testimonial"), "60%");
+
+var stickyHeader = new StickyHeader();

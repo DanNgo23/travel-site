@@ -563,7 +563,7 @@ a {
     background-color: #2f5572;
     color: #FFF;
     text-decoration: none;
-    padding: .75rem 1.2rem;
+    padding: 0.75rem 1.2rem;
     display: inline-block;
 }
 
@@ -578,9 +578,9 @@ a {
 
 @media (min-width: 530px) {
 
-.btn {
+.btn--large {
         font-size: 1.25rem
-}
+    }
     }
 
 .wrapper {
@@ -1423,7 +1423,7 @@ a {
 
 .site-header {
     /* give some vertical padding (can be 10px) but no horizontal padding */
-    padding: 6px 0;
+    padding: 10px 0;
     /* have the site header overlay the large hero section */
     position: absolute;
     /* when an element is positioned absolutely, by default, it will try to shrink-wrap */
@@ -1455,11 +1455,18 @@ a {
 @media (min-width: 800px) {
 
 .site-header {
+        /* lock the element to the top of the screen as we scroll */
+        position: fixed;
         /* transparent blue */
         /* the postcss-hexrgba plugin automatically converts hexadecimal color codes to rgb values 47, 85, 114 */
         background-color: rgba(47,85,114, 0.3)
+        
+        /* use a darker blue for the header when we scroll down */
     
 }
+        .site-header--dark {
+            background-color: rgba(23, 51, 72, 0.85);
+        }
     }
 
 @media (min-width: 800px) {
@@ -1484,6 +1491,13 @@ a {
         /* we can decrease the size by going below a value of 1 */
         -webkit-transform: translateX(-50%) scale(0.8);
                 transform: translateX(-50%) scale(0.8);
+        
+        /* the transform value should transition smoothly over the course of 0.3 seconds*/
+        -webkit-transition: -webkit-transform 0.3s ease-out;
+        transition: -webkit-transform 0.3s ease-out;
+        transition: transform 0.3s ease-out;
+        transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out; 
+        
         /* by default, when we use transform: scale, */
         /* the element considers its perfect center to be the origin of the tranform, */
         /* meaning it shrink equally in all 4 directions so that its center is still positioned */
@@ -1505,7 +1519,18 @@ a {
             left: auto;
             -webkit-transform: translateX(0);
                     transform: translateX(0)
+            
+            /* target the site-header class when it's using the dark modifier */
+            /* we add a space to create a descendant selector */
+            /* the ampersand & will give us the selector for the __logo element */
+            /* this whole selector will target the logo only when the dark header is being used */
     }
+            .site-header--dark .site-header__logo {
+                /* shrink the element */
+                /* once the dark header is used, the logo will fit in the bar */
+                -webkit-transform: scale(0.57);
+                        transform: scale(0.57);
+            }
     }
 
 /* we need to remove the clear view escapes logo from the natural flow of the page */
@@ -1792,6 +1817,8 @@ a {
     }
     }
 
+/* the rule targeting the link elements */
+
 .primary-nav a {
         /* text should be white */
         color: #FFF;
@@ -1811,12 +1838,19 @@ a {
 
 .primary-nav a {
             /* add some vertical padding but no horizontal padding (can be 12px) */
-            padding: 15px 0;
+            padding: 12px 0;
             /* use a standard font-size of 1rem */
             font-size: 1rem;
             /* use not background color */
             background-color: transparent
+            
+            /* the ampersand & gives us the "a" selector */
+            /* and apply only if it has a class of is-current-link */
     }
+            .primary-nav a.is-current-link {
+                /* we give the current link a light orange color */
+                color: #fabb69;
+            }
     }
 
 /* begin with a class selector */
