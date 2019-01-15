@@ -1,13 +1,30 @@
 var gulp = require('gulp'),
 svgSprite = require('gulp-svg-sprite'),
 rename = require('gulp-rename'),
-del = require('del');
+del = require('del'),
+svg2png = require('gulp-svg2png');
 
 var config = {
+    shape: {
+        spacing: {
+            /* adjust the sprite file so there is 1 pixel of padding or */
+            /* spacing in between the different icons */
+            padding: 1
+        }
+    },
     /* in order for the svgSprite package to do anything useful, */
     /* we need to tell it in our config object which mode it should use */
     mode: {
         css: {
+            
+            variables: {
+              /* come up with any name we want for our filter function */
+              replaceSvgWithPng: function() {
+                return function(sprite, render) {
+                    return render(sprite).split('.svg').join('.png');
+                }
+              }
+            },
             /* provide a path and file name that we want to use */
             /* we are removing the .css from the file name */
             sprite: 'sprite.svg', 
@@ -50,10 +67,22 @@ gulp.task('createSprite', ['beginClean'], function() {
         .pipe(gulp.dest('./app/temp/sprite/'));
 });
 
-/* make sure this task considers the createSprite task as a dependency using the second argument */
-gulp.task('copySpriteGraphic', ['createSprite'], function() {
-    /* point towards the svg image we want to move or copy */
-    return gulp.src('./app/temp/sprite/css/**/*.svg')
+/* list the createSprite task as a dependency */
+gulp.task('createPngCopy', ['createSprite'], function() {
+    /* we use gulp.src() (src for source) to point towards the file we want to begin w/ or do something w/ */
+    /* because the file name is dynamic, we grab any file that has an svg extension */
+    return gulp.src('./app/temp/sprite/css/*.svg')
+        /* pipe this file through the package we downloaded */
+        .pipe(svg2png())
+        /* pipe the file that the svg2png() will create to our destination folder */
+        .pipe(gulp.dest('./app/temp/sprite/css'));
+    
+});
+
+/* make sure this task considers the createPngCopy task as a dependency using the second argument */
+gulp.task('copySpriteGraphic', ['createPngCopy'], function() {
+    /* point towards the svg and png images we want to move or copy */
+    return gulp.src('./app/temp/sprite/css/**/*.{svg,png}')
         /* our sprite graphic now lives at this desired location */
         .pipe(gulp.dest('./app/assets/images/sprites'));
 });
@@ -78,4 +107,4 @@ gulp.task('endClean', ['copySpriteGraphic', 'copySpriteCSS'], function() {
 
 /* run all tasks with one command */
 /* gulp will begin with one task and then wait for it to complete before the next task */
-gulp.task('icons', ['beginClean', 'createSprite', 'copySpriteGraphic', 'copySpriteCSS', 'endClean']);
+gulp.task('icons', ['beginClean', 'createSprite', 'createPngCopy', 'copySpriteGraphic', 'copySpriteCSS', 'endClean']);

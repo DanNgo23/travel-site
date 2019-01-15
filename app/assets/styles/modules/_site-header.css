@@ -85,7 +85,7 @@
             .site-header--dark & {
                 /* shrink the element */
                 /* once the dark header is used, the logo will fit in the bar */
-                transform: scale(0.57);
+                transform: scale(0.56);
             }
         }
     }

@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
 webpack = require('webpack');
 
-gulp.task('scripts', function(callback) {
+/* add the modernizr task as a dependency */
+gulp.task('scripts', ['modernizr'], function(callback) {
     /* when we run webpack programmatically like this within a gulp task, */
     /* webpack needs help finding the webpack config file */
     /* provide a path to the config file relative from our tasks file */
