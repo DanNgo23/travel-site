@@ -1,0 +1,44 @@
+.social-icons {
+    text-align: center;
+    
+    &__icon {
+        background-color: $mainOrange;
+        /* all of the social media icons will sit on a single line but inline-block will */
+        /* let us give them a custom height if we need to */
+        display: inline-block;
+        /* add spacing between each icon */
+        /* we don't need any top margin but we want 5px of spacing on the right, bottom, and left */
+        margin: 0 5px 5px 5px;
+        /* make each icon link the same size */
+        width: 33%;
+        height: 72px;
+        
+        position: relative;
+        
+        @mixin atSmall {
+            width: 72px;
+            /* add horizontal spacing between each icon */
+            margin: 0 5px; 
+        }
+        
+        /* create a nested descendant selector rule */
+        /* look for any element that has a class of icon */
+        .icon {
+            /* the automated width and height values from our automated sprite setup */
+            /* can actually be applied to the element */
+            /* if we are making this icon element position: absolute, */
+            /* we need to tell its parent element to be position: relative */
+            display: block;
+            /* center the icon within the large orange square */
+            /* come down from the top and come in from the left 50% */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* top and left 50% would push the icon down to far to the bottom right corner */
+            /* to have the icon perfectly centered, we pull it back up half of its own height and */
+            /* pull it back to the left half of its own width */
+            /* we use the translate function to control the positioning */
+            transform: translate(-50%, -50%);
+        }
+    }
+}

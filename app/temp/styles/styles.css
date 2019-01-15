@@ -605,6 +605,10 @@ a {
         max-width: 976px;
     }
 
+.wrapper--narrow {
+        max-width: 470px;
+    }
+
 .wrapper--no-padding-until-medium {
         /* offset left and right padding */
         padding-left: 0;
@@ -1043,6 +1047,13 @@ a {
 
 .section-title--blue {
         color: #2f5572;
+    }
+
+/* in the modal, reduce the margin between "Get in Touch" and the below text */
+
+.section-title--less-margin {
+        margin-bottom: 1.3rem;
+        margin-top: 0;
     }
 
 /* the double underscore means it is an element that belongs to the block section-title */
@@ -1883,4 +1894,145 @@ a {
         -webkit-transform: scale(1);
                 transform: scale(1);
     }
+
+.modal {
+    /* we want to the modal div to be front and center no matter where the user has scrolled to */
+    position: fixed;
+    /* layer the modal div on top of all the other content; the highest z-index value should be positioned on top */
+    z-index: 5;
+    /* give the modal div a transparent white background */
+    background-color: rgba(255, 255, 255, 0.94);
+    /* we want the overlay to take up the full screen- the full available height and width */
+    /* the full height */
+    top: 0;
+    bottom: 0;
+    /* the full width */
+    left: 0;
+    right: 0;
+    /* by default on page load, the modal is hidden */
+    opacity: 0;
+    /* it's invisible with opacity now but still layered over all our other content */
+    /* we fix that with visibility: hidden */
+    visibility: hidden;
+    /* add a zoom out effect */
+    /* initially have the content a little larger than normal */
+    /* once the content is visible, we set it back to a scale of 1 */
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+    /* we don't want the is-visible changes to happen abruptly in 1 millisecond */
+    /* we want to animate or transition all properties smoothly over 0.3 seconds */
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.modal--is-visible {
+        opacity: 1;
+        /* offset the visibility: hidden */
+        visibility: visible;
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }
+
+.modal__inner {
+        /* vertically center the content within the height of the browser */
+        position: absolute;
+        /* elements positioned absolutely try to shrink wrap their size */
+        /* but we want this element to keep its full width */
+        width: 100%;
+        /* to actually vertically center it, we want to push it down from the top 50% */
+        top: 50%;
+        /* top: 50% by itself pushes the content down to far */
+        /* to fix that, we pull the content back up half of its own height */
+        /* the Y means we only want to adjust its vertical positioning */
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+    }
+
+.modal__description {
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: 300;
+        /* more spacing between each line of text */
+        line-height: 1.65;
+    }
+
+.modal__close {
+        /* position the X in the top right corner */
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        /* make the X larger */
+        font-size: 2rem;
+        /* stretch it horizontally to make it look more like a close icon and less like an X */
+        -webkit-transform: scaleX(1.2);
+                transform: scaleX(1.2);
+        /* when the X expands, it expands towards the midle of the page and not closer to the top right */
+        /* so that it doesn't appear to be closer to the edge of the screen than it originally was */
+        /* set the transform origin to be the top right corner */
+        /* to get to the right horizontally, we say go 100% */
+        /* to stay in the top right vertically, we don't need to travel at all */
+        -webkit-transform-origin: 100% 0;
+                transform-origin: 100% 0;
+        color: #2f5572;
+        /* turn the cursor into a pointer hand like its a like */
+        cursor: pointer;
+    }
+
+/* when it is hovered (the ampersand & gives us __close) */
+
+.modal__close:hover {
+            color: #d59541;
+            
+        }
+
+.social-icons {
+    text-align: center;
+}
+
+.social-icons__icon {
+        background-color: #d59541;
+        /* all of the social media icons will sit on a single line but inline-block will */
+        /* let us give them a custom height if we need to */
+        display: inline-block;
+        /* add spacing between each icon */
+        /* we don't need any top margin but we want 5px of spacing on the right, bottom, and left */
+        margin: 0 5px 5px 5px;
+        /* make each icon link the same size */
+        width: 33%;
+        height: 72px;
+        
+        position: relative;
+        
+        /* create a nested descendant selector rule */
+    }
+
+@media (min-width: 530px) {
+
+.social-icons__icon {
+            width: 72px;
+            /* add horizontal spacing between each icon */
+            margin: 0 5px
+    }
+    }
+
+/* look for any element that has a class of icon */
+
+.social-icons__icon .icon {
+            /* the automated width and height values from our automated sprite setup */
+            /* can actually be applied to the element */
+            /* if we are making this icon element position: absolute, */
+            /* we need to tell its parent element to be position: relative */
+            display: block;
+            /* center the icon within the large orange square */
+            /* come down from the top and come in from the left 50% */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* top and left 50% would push the icon down to far to the bottom right corner */
+            /* to have the icon perfectly centered, we pull it back up half of its own height and */
+            /* pull it back to the left half of its own width */
+            /* we use the translate function to control the positioning */
+            -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+        }
 

@@ -11109,9 +11109,22 @@ var _StickyHeader = __webpack_require__(5);
 
 var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
 
+var _Modal = __webpack_require__(7);
+
+var _Modal2 = _interopRequireDefault(_Modal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* create a new object that uses the above class as a blueprint */
+var mobileMenu = new _MobileMenu2.default();
+
+/* we need to pass a couple arguments within these two constructors in order */
+/* to describe which elements we want to reveal and what offset they should use */
+/* the first argument will be a jquery selector that points to the element we want */
+/* we can reveal any element on the page on scroll by simply reusing and recycling */
+/* our RevealOnScroll class; we chose two elements belwo */
+
+/* the first instance or object will be for our feature items */
 // hypothetical example code to test JavaScript
 
 /* this line will not work within a web browser */
@@ -11155,20 +11168,12 @@ $("h1").remove();
 */
 
 /* this variable could be any name */
-var mobileMenu = new _MobileMenu2.default();
-
-/* we need to pass a couple arguments within these two constructors in order */
-/* to describe which elements we want to reveal and what offset they should use */
-/* the first argument will be a jquery selector that points to the element we want */
-/* we can reveal any element on the page on scroll by simply reusing and recycling */
-/* our RevealOnScroll class; we chose two elements belwo */
-
-/* the first instance or object will be for our feature items */
 new _RevealOnScroll2.default((0, _jquery2.default)(".feature-item"), "85%");
 /* the second instance or object will be for our testimonial items */
 new _RevealOnScroll2.default((0, _jquery2.default)(".testimonial"), "60%");
 
 var stickyHeader = new _StickyHeader2.default();
+var modal = new _Modal2.default();
 
 /***/ }),
 /* 3 */
@@ -11973,6 +11978,106 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* when we click the "Get in Touch" button, our modal overlay is revealed */
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Modal = function () {
+    function Modal() {
+        _classCallCheck(this, Modal);
+
+        /* select all DOM elements we will need to work with */
+        /* use jquery to select that element */
+        /* this is the button */
+        this.openModalButton = (0, _jquery2.default)(".open-modal");
+        /* this is the modal we want to reveal */
+        this.modal = (0, _jquery2.default)(".modal");
+        /* this is the top right X or close button */
+        this.closeModalButton = (0, _jquery2.default)(".modal__close");
+        /* we want to listen for the events as soon as the page loads, so we call the events method */
+        this.events();
+    }
+
+    _createClass(Modal, [{
+        key: "events",
+        value: function events() {
+            // if user clicks the open modal button, call our openModal() method
+            this.openModalButton.click(this.openModal.bind(this));
+            // if user clicks the x close modal button, call our closeModal() method
+            this.closeModalButton.click(this.closeModal.bind(this));
+            /* user pushes any key on the keyboard, call our keyPressHandler() method */
+            /* use jquery to select the overall document (the entire page) */
+            /* and the jquery method keyup(), which will fire when the user let's go of the key */
+            (0, _jquery2.default)(document).keyup(this.keyPressHandler.bind(this));
+        }
+    }, {
+        key: "keyPressHandler",
+        value: function keyPressHandler(e) {
+            /* only if it was the escape key do we want to call our closeModal() method */
+            /* key code for the escape key is 27 */
+            if (e.keyCode == 27) {
+                /* when this line of code runs, */
+                /* however, the javascript this keyword will not be set to our main object or class */
+                /* it will be set to the element that called the keyup() method, */
+                /* which would be the overall document or page */
+                /* however, we can control the this keyword with bind() in our event handler, */
+                /* and letting the this keyword keep its current value - .bind(this) */
+                this.closeModal();
+            }
+        }
+    }, {
+        key: "openModal",
+        value: function openModal() {
+            /* when the below line of code runs, the javascript key word will no longer be pointing */
+            /* pointing towards our main class or object, meaning we won't be able to access */
+            /* the modal property by using the "this" keyword */
+            /* this is because we are not running the method directly */
+            /* instead, the method is being called by the event handlers above */
+            /* so by the time the method actually runs, javascript's this keyword will have been */
+            /* reset to the element that was just clicked on */
+            /* HOWEVER, we can have fine-grained control over what the this keyword gets set to by using bind() */
+            /* within the event handler above, after we call the method we want to run, */
+            /* we add .bind(this), wanting the this key word to stay to what it's currently set to */
+            /* that way, when the openModal() method actually runs, the this keyword is still pointing */
+            /* towards our main object or class so we can access a property */
+            /* we want to be sure that we also use bind when we run the closeModal() method */
+
+            this.modal.addClass("modal--is-visible");
+            /* we include return false because the header "Get in Touch " button is a link element */
+            /* and if we click a link element that has a href value of just #, */
+            /* the browser automatically scrolls to the top of the page, which we do not want */
+            /* return false will prevent that default behavior of scrolling up */
+            return false;
+        }
+    }, {
+        key: "closeModal",
+        value: function closeModal() {
+            this.modal.removeClass("modal--is-visible");
+        }
+    }]);
+
+    return Modal;
+}();
+
+exports.default = Modal;
 
 /***/ })
 /******/ ]);

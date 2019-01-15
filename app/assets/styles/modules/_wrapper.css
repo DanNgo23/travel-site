@@ -19,6 +19,10 @@
         max-width: 976px;
     }
     
+    &--narrow {
+        max-width: 470px;
+    }
+    
     &--no-padding-until-medium {
         /* offset left and right padding */
         padding-left: 0;

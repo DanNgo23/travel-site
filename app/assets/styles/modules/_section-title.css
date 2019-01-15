@@ -17,6 +17,12 @@
         color: $mainBlue;
     }
     
+    /* in the modal, reduce the margin between "Get in Touch" and the below text */
+    &--less-margin {
+        margin-bottom: 1.3rem;
+        margin-top: 0;
+    }
+    
     /* the double underscore means it is an element that belongs to the block section-title */
     &__icon {
         /* push the icon down 8 pixels */
