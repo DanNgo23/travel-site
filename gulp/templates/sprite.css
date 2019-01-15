@@ -1,4 +1,4 @@
-/* Do not edit modules/_sprite directly, as it is generated automatically gy Gulp.
+/* Do not edit modules/_sprite directly, as it is generated automatically by Gulp.
    Instead, edit gulp/templates/sprite. */
 
 /* the gulp svgSprite package makes use of the moustache template system */
@@ -12,6 +12,10 @@
             /* provide a url path that points towards the sprite svg file */
             /* the {{{sprite}}} variable is responsible for going into the svg folder and getting the path for the sprite file */
             background-image: url('/assets/images/sprites/{{{sprite}}}');
+        }
+        
+        .no-svg .icon {
+            background-image: url('/assets/images/sprites/{{#replaceSvgWithPng}}{{{sprite}}}{{/replaceSvgWithPng}}');
         }
     {{/first}}
         

@@ -112,7 +112,8 @@
     /* begin equal height rules, target the appropriate modifier class */
     /* once a screen is large enough to be considered medium, */
     /* we will apply a bit of css to make all of the columns equal height */
-    &--equal-height-at-medium {
+    /* only apply this modifier class if the browser supports flexbox */
+    .flexbox &--equal-height-at-medium {
         @mixin atMedium {
             /* tell the parent row div to use flexbox */
             /* by itself, this won't do anything */
@@ -133,7 +134,8 @@
     /* begin equal height rules, target the appropriate modifier class */
     /* once a screen is large enough to be considered medium, */
     /* we will apply a bit of css to make all of the columns equal height */
-    &--equal-height-at-large {
+    /* only apply this modifier class if the browser supports flexbox */
+    .flexbox &--equal-height-at-large {
         @mixin atLarge {
             /* tell the parent row div to use flexbox */
             /* by itself, this won't do anything */
