@@ -4,6 +4,8 @@ import smoothScroll from 'jquery-smooth-scroll';
 
 class StickyHeader {
     constructor() {
+        /* select all elements on the page that have a class of "lazyload" */
+        this.lazyImages = $(".lazyload");
         this.siteHeader = $(".site-header");
         this.headerTriggerElement = $(".large-hero__title");
         /* we want this Waypoint to be created as soon as the page loads */
@@ -21,7 +23,20 @@ class StickyHeader {
         this.createPageSectionWaypoints();
         /* run this method as soon as the page loads */
         this.addSmoothScrolling();
+        this.refreshWaypoints();
         
+    }
+    
+    /* tell Waypoints to refresh its measurements everytime a new image is lazy loaded */
+    /* this will stop waypoints from firing too early when implementing lazyloading */
+    refreshWaypoints() {
+        /* the jquery on() method takes two arguments */
+        /* the first argument is the event we want to be on the lookout for */
+        /* the second argument is what we want to do, e.g. supply an anonymous function */
+        this.lazyImages.on('load', function() {
+           /* access the main Waypoint object and it has a method refreshAll() */
+           Waypoint.refreshAll();
+        });
     }
     
     /* when we click on any of the top header links, over the course of a third of a second, */

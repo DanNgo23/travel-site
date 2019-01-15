@@ -38,11 +38,15 @@
         background-color: #e0e6ef;
         
         @mixin atLarge {
-            /* tell the image to be aligned at the top of the section, and horizontally, to be aligned in the center */
-            /* the image should not repeat; only display once */
-            background: url('/assets/images/testimonials-bg.jpg') top center no-repeat;
-            /* shrink or stretch the image to always be large or small enough to perfectly cover the containing div */
-            background-size: cover;
+            /* the ampersand & will select the page section --testimonials class */
+            /* we say only if that element also has a class of lazyloaded do we want the following css to be applied */
+            &.lazyloaded {
+                /* tell the image to be aligned at the top of the section, and horizontally, to be aligned in the center */
+                /* the image should not repeat; only display once */
+                background: url('/assets/images/testimonials-bg.jpg') top center no-repeat;
+                /* shrink or stretch the image to always be large or small enough to perfectly cover the containing div */
+                background-size: cover;
+            }
         }
     }
 }

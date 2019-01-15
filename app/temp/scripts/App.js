@@ -11433,6 +11433,8 @@ var StickyHeader = function () {
     function StickyHeader() {
         _classCallCheck(this, StickyHeader);
 
+        /* select all elements on the page that have a class of "lazyload" */
+        this.lazyImages = (0, _jquery2.default)(".lazyload");
         this.siteHeader = (0, _jquery2.default)(".site-header");
         this.headerTriggerElement = (0, _jquery2.default)(".large-hero__title");
         /* we want this Waypoint to be created as soon as the page loads */
@@ -11450,14 +11452,30 @@ var StickyHeader = function () {
         this.createPageSectionWaypoints();
         /* run this method as soon as the page loads */
         this.addSmoothScrolling();
+        this.refreshWaypoints();
     }
 
-    /* when we click on any of the top header links, over the course of a third of a second, */
-    /* the browser automatically smoothly scrolls to that section */
-    /* create a method to enable smooth scrolling */
+    /* tell Waypoints to refresh its measurements everytime a new image is lazy loaded */
+    /* this will stop waypoints from firing too early when implementing lazyloading */
 
 
     _createClass(StickyHeader, [{
+        key: 'refreshWaypoints',
+        value: function refreshWaypoints() {
+            /* the jquery on() method takes two arguments */
+            /* the first argument is the event we want to be on the lookout for */
+            /* the second argument is what we want to do, e.g. supply an anonymous function */
+            this.lazyImages.on('load', function () {
+                /* access the main Waypoint object and it has a method refreshAll() */
+                Waypoint.refreshAll();
+            });
+        }
+
+        /* when we click on any of the top header links, over the course of a third of a second, */
+        /* the browser automatically smoothly scrolls to that section */
+        /* create a method to enable smooth scrolling */
+
+    }, {
         key: 'addSmoothScrolling',
         value: function addSmoothScrolling() {
             /* call the smooth scroll library on each of the header links */

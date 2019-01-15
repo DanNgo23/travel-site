@@ -4,14 +4,20 @@ var path = require('path');
 module.exports = {
     /* tell webpack which file it should begin looking at to create its bundle */
     /* that's our main App.js file */
-    entry: "./app/assets/scripts/App.js",
+    /* next, we tell webpack to create a bundled version of Vendor.js */
+    /* create an object that lists multiple entry points */
+    entry: {
+        App: "./app/assets/scripts/App.js",
+        Vendor: "./app/assets/scripts/Vendor.js"
+    },
     /* tell webpack where the final product bundled file should be output to */
     output: {
         /* provide an absolute path to where we want the bundled file to be created */
         /* an absolute path is required so webpack and find the folder on our computer */
         /* this will create an absolute path to a folder on our computer, the scripts folder*/
         path: path.resolve(__dirname, "./app/temp/scripts"),
-        filename: "App.js"
+        /* keep the file name dynamic */
+        filename: "[name].js"
     },
     
     module: {
