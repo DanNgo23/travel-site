@@ -721,7 +721,7 @@ a {
             .page-section--testimonials.lazyloaded {
                 /* tell the image to be aligned at the top of the section, and horizontally, to be aligned in the center */
                 /* the image should not repeat; only display once */
-                background: url('/assets/images/testimonials-bg.jpg') top center no-repeat;
+                background: url('../../assets/images/testimonials-bg.jpg') top center no-repeat;
                 /* shrink or stretch the image to always be large or small enough to perfectly cover the containing div */
                 background-size: cover;
             }
@@ -1225,11 +1225,14 @@ a {
 .icon {
             /* provide a url path that points towards the sprite svg file */
             /* the sprite-e79e95cc.svg variable is responsible for going into the svg folder and getting the path for the sprite file */
-            background-image: url('/assets/images/sprites/sprite-e79e95cc.svg');
+            /* we don't want to begin with a forward slash because */
+            /* we don't want to go to the base of the current domain */
+            /* instead, we want to go up 2 folders */
+            background-image: url('../../assets/images/sprites/sprite-e79e95cc.svg');
         }
 
 .no-svg .icon {
-            background-image: url('/assets/images/sprites/sprite-e79e95cc.png');
+            background-image: url('../../assets/images/sprites/sprite-e79e95cc.png');
         }
 
 /* we want to use a variable, leave an opening in the template that the package can fill in with info for each icon */

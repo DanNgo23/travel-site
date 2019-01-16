@@ -11,11 +11,14 @@
         .icon {
             /* provide a url path that points towards the sprite svg file */
             /* the {{{sprite}}} variable is responsible for going into the svg folder and getting the path for the sprite file */
-            background-image: url('/assets/images/sprites/{{{sprite}}}');
+            /* we don't want to begin with a forward slash because */
+            /* we don't want to go to the base of the current domain */
+            /* instead, we want to go up 2 folders */
+            background-image: url('../../assets/images/sprites/{{{sprite}}}');
         }
         
         .no-svg .icon {
-            background-image: url('/assets/images/sprites/{{#replaceSvgWithPng}}{{{sprite}}}{{/replaceSvgWithPng}}');
+            background-image: url('../../assets/images/sprites/{{#replaceSvgWithPng}}{{{sprite}}}{{/replaceSvgWithPng}}');
         }
     {{/first}}
         
